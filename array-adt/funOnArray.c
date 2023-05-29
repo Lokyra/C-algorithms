@@ -61,6 +61,93 @@ void Reverse2(struct Array *arr) {
     }
 }
 
+int isSorted(struct Array *arr) {
+    for (int i=0;i<arr->length-1;i++) {
+        if (arr->A[i]>arr->A[i+1])
+            return 0;
+    }
+    return 1;
+}
+
+struct Array* Merge(struct Array *arr1, struct Array *arr2) {
+    int i, j, k;
+    struct Array *arr3 = (struct Array *)malloc(sizeof(struct Array));
+
+    while(i<arr1->length && j < arr2->length) {
+        if (arr1->A[i]<arr2->A[j])
+            arr3->A[k++]=arr1->A[i++];
+        else
+            arr3->A[k++]=arr2->A[j];
+    }
+
+    for(;i<arr1->length;i++)
+        arr3->A[k++] = arr1->A[i++];
+
+    for(;j<arr2->length;i++)
+        arr3->A[k++] = arr2->A[j++];
+
+    arr3->length=arr1->length+arr2->length;
+    arr3->size=10;
+
+    return arr3;
+}
+
+struct Array* Union(struct Array *arr1, struct Array *arr2) {
+    int i, j, k;
+    struct Array *arr3 = (struct Array *)malloc(sizeof(struct Array));
+
+    while(i<arr1->length && j < arr2->length) {
+        if (arr1->A[i]<arr2->A[j])
+            arr3->A[k++]=arr1->A[i++];
+        else if (arr2->A[j]<arr1->A[i]) 
+            arr3->A[k++]=arr2->A[j];
+        else
+        {
+            arr3->A[k++]=arr1->A[i++];
+            j++;
+        }
+    }
+
+    for(;i<arr1->length;i++)
+        arr3->A[k++] = arr1->A[i++];
+
+    for(;j<arr2->length;i++)
+        arr3->A[k++] = arr2->A[j++];
+
+    arr3->length = k;
+    arr3->size = 10;
+    return arr3;
+}
+
+struct Array* Intersection(struct Array *arr1, struct Array *arr2) {
+    int i, j, k;
+    struct Array *arr3 = (struct Array *)malloc(sizeof(struct Array));
+
+    while (i<arr1->length && j < arr2->length) {
+        if (arr1->A[i]<arr2->A[j])
+            arr3->A[k++]=arr1->A[i++];
+        else if (arr2->A[j]<arr1->A[i]) 
+            arr3->A[k++]=arr2->A[j];
+        else
+        {
+            arr3->A[k++]=arr1->A[i++];
+            j++;
+        }
+    }
+
+    for(;i<arr1->length;i++)
+        arr3->A[k++] = arr1->A[i++];
+
+    for(;j<arr2->length;i++)
+        arr3->A[k++] = arr2->A[j++];
+
+    arr3->length = k;
+    arr3->size = 10;
+    return arr3;
+}
+
 int main() {
+    int a[5] = {1, 2 ,3 ,4 ,5};
+    printf("%d", 2[a]);
     return 0;
 } 
